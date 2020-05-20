@@ -1,85 +1,149 @@
 <h5 class="mb-3 text-info">Componente <pre class="d-inline">form-templ-driven02</pre></h5>
+<div class="row">
+    <div class="custom-control custom-switch col-12 col-sm-6">
+            <input type="checkbox" class="custom-control-input" id="customSwitch1" (input)="prenderApagarExplicacion()" 
+            [checked]="explicacionOn">
+            <label class="custom-control-label" for="customSwitch1">Mostrar/Ocultar decripci&oacute;n y comentarios ejemplo</label>
+    </div>
+    <div class="custom-control custom-switch col-12 col-sm-6">
+            <input type="checkbox" class="custom-control-input" id="customSwitch2" (input)="prenderApagarDepuracion()" 
+            [checked]="depuracionOn">
+            <label class="custom-control-label" for="customSwitch2">Activar/desactivar modo depuracion</label>
+    </div>
+</div>
+<div *ngIf="explicacionOn" class="table-info p-3 my-3 rounded">
+        <div class="text-center font-weight-bold">Ejemplo de formulario de tipo <i>Template Driven Forms</i> con validaciones propias de Angular</div>
+        <div class="text-muted mt-2">
+            Caracter&iacute;sticas:
+            <ul>
+                <li>Los campos en estado v&aacute;lido tienen una franja vertical de color <span class="text-success">verde</span> a la izquierda.</li>
+                <li>Los campos en estado inv&aacute;lido tienen una franja vertical de color <span class="text-danger">rojo</span> a la izquierda.</li>
+                <li>El bot&oacute;n de registro se habilita solamente cuando todos los campos son v&aacute;lidos.</li>
+                <li>El ejemplo propone una estructura simple para formularios de captura basado en <i>ngModel</i></li>
+            </ul>
+            <strong>Aspectos t&eacute;cnicos relevantes</strong>:
+            <ul>
+                <li>Cada campo validable en el <i>template</i> usa el <strong>atributo html 5 </strong> <code class="font-weight-bold">pattern</code>, que ser&aacute; 
+                    la v&iacute;a para que un campo pueda ser reconocido por Angular como v&aacute;lido o inv&aacute;lido.</li>
+                <li>Se aprovechan las <strong>clases CSS</strong> que Angular crea en los campos de entrada. Estas clases reflejan el estado de cada campo.
+                    Las clases son <code class="font-weight-bold">ng-untouched</code>, <code class="font-weight-bold">ng-touched</code>, 
+                    <code class="font-weight-bold">ng-pristine</code>, <code class="font-weight-bold">ng-dirty</code>,
+                    <code class="font-weight-bold">ng-invalid</code> y <code class="font-weight-bold">ng-dirty</code>.
+                </li>
+                <li>
+                    Se usan <strong>estilos sobre</strong> algunas de las <strong>clases mencionadas</strong>, para marcar visualmente (con bordes izquierdos de color verde o rojo ) los campos como v&aacute;lidos 
+                    o inv&aacute;lidos. <br>
+                    <code>
+                            <strong>.ng-valid</strong>[required]   &#123;<br>
+                                border-left: 5px solid #42A948; <br>
+                              &#125;<br>
+                              
+                             <strong> .ng-invalid</strong>:not(form)   &#123; <br>
+                                border-left: 5px solid #a94442;<br> 
+                            &#125;<br>
+                    </code>
+                </li>
+                <li>Se accede al objeto subyacente <code class="font-weight-bold">ngForm</code>.
+                </li>
+                <li>Se invoca al <strong>m&eacute;todo <i>resetForm()</i> de <i>ngForm</i></strong> tras el <i>submit</i> del formulario
+                    y se vuelve a inicializar el objeto que sirve de <i>modelo</i>,
+                    pero de manera as&iacute;ncrona para no chocar con el ciclo de vida subyacente de Angular. De otro modo,
+                    la ejecución del <i>reset</i> destruye el objeto <i>modelo</i>.
+                </li>
+                <li>
+                    Para desplegar los mensajes de error asociados a las validaciones <strong>se accede al objeto <i>ngModel</i> asociado
+                    con cada control de captura</strong> de datos y con base en su estado (derivado de las clases mencionadas antes)
+                    se hace visible o invisible cada mensaje
+                </li>
+                <li>
+                    Se usa el <strong>estado de validez/invalidez a nivel forma</strong> para habilitar/deshabilitar el boton de <i>submit</i>
+                </li>
+            </ul>
+        </div>
+    
+    </div>
+    
 <div class="p-3  border border-info rounded rounded-lg mt-3">
-        <form (ngSubmit)="insertarDireccion() ; formDir.resetForm(); renovarPublicacionDir()" #formDir="ngForm">
-            <div class="text-info font-weight-bold">Dirección:</div>
-            <div class="form-row ">
-                <div class="col-sm-12 col-md-8 col-lg-9  my-2">
-                    <input type="text" class="form-control" placeholder="Calle" 
-                    pattern="^[\wÁÉÍÓÚáéíóú][\wÁÉÍÓÚáéíóú\s'.]{2}[\wÁÉÍÓÚáéíóú\s]*"
-                    [(ngModel)] ="direccionForm.calle" name="calle"
-                    required #spyDir #inpCalle="ngModel">
-                    <div [hidden]="inpCalle.valid || inpCalle.pristine" class="alert alert-danger">
-                        La calle es un campo obligatorio. No se aceptan valores que contengan caracteres distintos de letras y números. 
-                        Evite iniciar con espacios.
-                    </div>
-                    <i *ngIf="depuracionOn" class="font-smaller text-danger">
-                        {{spyDir.className.replace('form-control','')}}</i>
+    <form (ngSubmit)="insertarDireccion(formDir);" #formDir="ngForm">
+        <div class="text-info font-weight-bold">Dirección:</div>
+        <div class="form-row ">
+            <div class="col-sm-12 col-md-8 col-lg-9  my-2">
+                <input type="text" class="form-control" placeholder="Calle" 
+                pattern="^[\wÁÉÍÓÚáéíóú][\wÁÉÍÓÚáéíóú\s'.]{2}[\wÁÉÍÓÚáéíóú\s]*"
+                [(ngModel)] ="direccionForm.calle" name="calle"
+                required #spyDir #inpCalle="ngModel">
+                <div [hidden]="inpCalle.valid || inpCalle.pristine" class="alert alert-danger">
+                    La calle es un campo obligatorio. No se aceptan valores que contengan caracteres distintos de letras y números. 
+                    Evite iniciar con espacios.
                 </div>
-                <div class="col-6 col-sm my-2">
-                    <input type="text" class="form-control" placeholder="Num Ext"
-                    [(ngModel)] ="direccionForm.numeroExt" name="numeroExt" 
-                    pattern="^\d\d*\-[A-Za-z]$|^\d\d*$"
-                    required #inpNumeroExt="ngModel">
-                    <div [hidden]="inpNumeroExt.valid || inpNumeroExt.pristine" class="alert alert-danger">
-                        El n&uacute;mero exterior es un campo obligatorio. Los valores aceptados son de la forma 34, 34-A, 5876-B
-                    </div>
-                </div>
-                <div class="col-6 col-sm my-2">
-                    <input type="text" class="form-control" placeholder="Num Int"
-                    [(ngModel)] ="direccionForm.numeroInt" name="numeroInt"
-                    pattern="^$|^\d*$|^[w]+$"
-                    #inpNumeroInt="ngModel">
-                    <div [hidden]="inpNumeroInt.valid || inpNumeroInt.pristine" class="alert alert-danger">
-                            No se aceptan valores que contengan caracteres distintos de letras y números
-                        </div>
-                    </div>
+                <i *ngIf="depuracionOn" class="font-smaller text-danger">
+                    {{spyDir.className.replace('form-control','')}}</i>
             </div>
-            <div class="form-row ">
-                <div class="col-sm-12 col-md-8 col-lg-9  my-2">
-                    <input type="text" class="form-control " placeholder="Colonia"
-                    pattern="^[\wÁÉÍÓÚáéíóú][\wÁÉÍÓÚáéíóú\s']{2}[\wÁÉÍÓÚáéíóú\s]*"
-                    [(ngModel)] ="direccionForm.colonia" name="colonia"
-                    required #spyColonia #inpColonia="ngModel">
-                    <div [hidden]="inpColonia.valid || inpColonia.pristine" class="alert alert-danger">
-                        La colonia es un campo obligatorio. No se aceptan valores que contengan caracteres distintos de letras y números.
-                        Evite iniciar con espacios.
-                    </div>
-                    <i *ngIf="depuracionOn" class="font-smaller text-danger">
-                    {{spyColonia.className.replace('form-control','')}}</i>
-                </div>
-                <div class="col-12 col-sm my-2">
-                    <input type="text" class="form-control" placeholder="C.P."
-                    [(ngModel)] ="direccionForm.cp" name="cp"
-                    pattern="^\d{5}$"
-                    required #inpCp="ngModel">
-                    <div [hidden]="inpCp.valid || inpCp.pristine" class="alert alert-danger">
-                        El c&oacute;digo postal es obligatorio y debe estar formado por 5 d&iacute;gitos
-                    </div>
-                </div>     
-            </div>
-            <div class="form-row">
-                <div class="col-12 col-sm-6 col-md-4 my-2">
-                    <select class="form-control" 
-                      [(ngModel)]  = "direccionForm.cveEstado" name="iEstado" 
-                      >
-                        <option *ngFor="let edoI of estados; let i=index " value="{{i}}" >{{edoI}}</option>
-                    </select>
-                </div>
-                <div class="col-12 col-sm-6 col-md-4 my-2">
-                    <select class="form-control" 
-                      [(ngModel)]  = "direccionForm.cveMunicipio" name="iMunicipio" 
-                      >
-                        <option *ngFor="let munI of municipios[direccionForm.cveEstado ]; let i=index " 
-                                value="{{i}}" >{{munI}} </option>
-                    </select>
+            <div class="col-6 col-sm my-2">
+                <input type="text" class="form-control" placeholder="Num Ext"
+                [(ngModel)] ="direccionForm.numeroExt" name="numeroExt" 
+                pattern="^\d\d*\-[A-Za-z]$|^\d\d*$"
+                required #inpNumeroExt="ngModel">
+                <div [hidden]="inpNumeroExt.valid || inpNumeroExt.pristine" class="alert alert-danger">
+                    El n&uacute;mero exterior es un campo obligatorio. Los valores aceptados son de la forma 34, 34-A, 5876-B
                 </div>
             </div>
-            <div class="mt-5 form-row">
-                <button class="btn btn-info ml-auto mr-auto col-12 col-sm-6 col-md-4 col-xl-3" 
-                    [disabled] = "!formDir.form.valid"
-                    type="submit" >Registrar</button>
+            <div class="col-6 col-sm my-2">
+                <input type="text" class="form-control" placeholder="Num Int"
+                [(ngModel)] ="direccionForm.numeroInt" name="numeroInt"
+                pattern="^$|^\d*$|^[w]+$"
+                #inpNumeroInt="ngModel">
+                <div [hidden]="inpNumeroInt.valid || inpNumeroInt.pristine" class="alert alert-danger">
+                        No se aceptan valores que contengan caracteres distintos de letras y números
+                    </div>
+                </div>
+        </div>
+        <div class="form-row ">
+            <div class="col-sm-12 col-md-8 col-lg-9  my-2">
+                <input type="text" class="form-control " placeholder="Colonia"
+                pattern="^[\wÁÉÍÓÚáéíóú][\wÁÉÍÓÚáéíóú\s']{2}[\wÁÉÍÓÚáéíóú\s]*"
+                [(ngModel)] ="direccionForm.colonia" name="colonia"
+                required #spyColonia #inpColonia="ngModel">
+                <div [hidden]="inpColonia.valid || inpColonia.pristine" class="alert alert-danger">
+                    La colonia es un campo obligatorio. No se aceptan valores que contengan caracteres distintos de letras y números.
+                    Evite iniciar con espacios.
+                </div>
+                <i *ngIf="depuracionOn" class="font-smaller text-danger">
+                {{spyColonia.className.replace('form-control','')}}</i>
             </div>
-        </form>
+            <div class="col-12 col-sm my-2">
+                <input type="text" class="form-control" placeholder="C.P."
+                [(ngModel)] ="direccionForm.cp" name="cp"
+                pattern="^\d{5}$"
+                required #inpCp="ngModel">
+                <div [hidden]="inpCp.valid || inpCp.pristine" class="alert alert-danger">
+                    El c&oacute;digo postal es obligatorio y debe estar formado por 5 d&iacute;gitos
+                </div>
+            </div>     
+        </div>
+        <div class="form-row">
+            <div class="col-12 col-sm-6 col-md-4 my-2">
+                <select class="form-control" 
+                    [(ngModel)]  = "direccionForm.cveEstado" name="iEstado" 
+                    >
+                    <option *ngFor="let edoI of estados; let i=index " value="{{i}}" >{{edoI}}</option>
+                </select>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 my-2">
+                <select class="form-control" 
+                    [(ngModel)]  = "direccionForm.cveMunicipio" name="iMunicipio" 
+                    >
+                    <option *ngFor="let munI of municipios[direccionForm.cveEstado ]; let i=index " 
+                            value="{{i}}" >{{munI}} </option>
+                </select>
+            </div>
+        </div>
+        <div class="mt-5 form-row">
+            <button class="btn btn-info ml-auto mr-auto col-12 col-sm-6 col-md-4 col-xl-3" 
+                [disabled] = "!formDir.form.valid"
+                type="submit" >Registrar</button>
+        </div>
+    </form>
 </div>
 <div *ngIf="direcciones.length" class="mt-3">
         <hr class="border-warning my-3">
@@ -108,4 +172,4 @@
             </tbody>
             <caption>Direcciones capturadas</caption>
         </table>
-    </div>
+</div>

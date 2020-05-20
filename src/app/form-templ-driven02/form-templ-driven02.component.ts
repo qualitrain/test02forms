@@ -1,5 +1,6 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
 import { Direccion } from '../entidades/direccion';
+import { NgForm} from '@angular/forms'
 
 @Component({
   selector: 'app-form-templ-driven02',
@@ -9,7 +10,9 @@ import { Direccion } from '../entidades/direccion';
 export class FormTemplDriven02Component implements OnInit {
 
   //Encender o apagar para monitorear comportamiento del formulario
-  depuracionOn:boolean=true;
+  depuracionOn:boolean=false;
+  //Encender o apagar para que salga una explicación del demo en la vista
+  explicacionOn:boolean = false;
 
   //Modelo
   direccionForm:Direccion;
@@ -29,6 +32,7 @@ export class FormTemplDriven02Component implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log("ngOnInit()");
   }
   renovarPublicacionDir(){
     this.direccionForm = this.crearDireccionVacia();
@@ -36,9 +40,23 @@ export class FormTemplDriven02Component implements OnInit {
   crearDireccionVacia():Direccion{
     return new Direccion('','','','','',0,0);
   }
-  insertarDireccion(){
+  insertarDireccion(formulario:NgForm){
     this.direcciones.push(this.direccionForm);
     this.direccionForm =this.crearDireccionVacia();
+    formulario.resetForm();
+    setTimeout(x => this.direccionForm = this.crearDireccionVacia(),0);
+  }
+  prenderApagarExplicacion(){
+    if(this.explicacionOn)
+      this.explicacionOn = false;
+    else
+      this.explicacionOn = true;
+  }
+  prenderApagarDepuracion(){
+    if(this.depuracionOn)
+      this.depuracionOn = false;
+    else
+      this.depuracionOn = true;
   }
 
 }
