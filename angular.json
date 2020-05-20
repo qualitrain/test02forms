@@ -26,7 +26,10 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/lib/jquery-3.4.1.slim.min.js",
+              "src/lib/bootstrap.bundle.min.js"              
+            ]
           },
           "configurations": {
             "production": {
@@ -90,7 +93,10 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/lib/jquery-3.4.1.slim.min.js",
+              "src/lib/bootstrap.bundle.min.js"              
+            ]
           }
         },
         "lint": {
