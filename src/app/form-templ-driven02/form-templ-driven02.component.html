@@ -28,7 +28,7 @@
                 <li>Se aprovechan las <strong>clases CSS</strong> que Angular crea en los campos de entrada. Estas clases reflejan el estado de cada campo.
                     Las clases son <code class="font-weight-bold">ng-untouched</code>, <code class="font-weight-bold">ng-touched</code>, 
                     <code class="font-weight-bold">ng-pristine</code>, <code class="font-weight-bold">ng-dirty</code>,
-                    <code class="font-weight-bold">ng-invalid</code> y <code class="font-weight-bold">ng-dirty</code>.
+                    <code class="font-weight-bold">ng-invalid</code> y <code class="font-weight-bold">ng-valid</code>.
                 </li>
                 <li>
                     Se usan <strong>estilos sobre</strong> algunas de las <strong>clases mencionadas</strong>, para marcar visualmente (con bordes izquierdos de color verde o rojo ) los campos como v&aacute;lidos 
@@ -52,8 +52,13 @@
                 </li>
                 <li>
                     Para desplegar los mensajes de error asociados a las validaciones <strong>se accede al objeto <i>ngModel</i> asociado
-                    con cada control de captura</strong> de datos y con base en su estado (derivado de las clases mencionadas antes)
-                    se hace visible o invisible cada mensaje
+                    con cada control de captura</strong> de datos y con base en su estado (<code>untouched, touched, pristine, dirty, valid</code> e <code>invalid</code>)
+                    se hace visible o invisible cada mensaje.
+                </li>
+                <li>
+                    <strong>Podemos generar mensajes de error m&aacute;s espec&iacute;ficos</strong> si revisamos el campo <code>errors.<i>tipoError</i></code> que está asociado
+                    al atributo html usado para la validaci&oacute;n (<code>required, minlength, pattern,</code> etc.)<br>
+                    As&iacute;, podr&iacute;amos usar algo como: <strong><code>&lt;div &#42;ngIf='ngMiCalle.errors.required'&gt;</code></strong>
                 </li>
                 <li>
                     Se usa el <strong>estado de validez/invalidez a nivel forma</strong> para habilitar/deshabilitar el boton de <i>submit</i>
@@ -61,7 +66,7 @@
             </ul>
         </div>
     
-    </div>
+</div>
     
 <div class="p-3  border border-info rounded rounded-lg mt-3">
     <form (ngSubmit)="insertarDireccion(formDir);" #formDir="ngForm">
@@ -72,9 +77,14 @@
                 pattern="^[\wÁÉÍÓÚáéíóú][\wÁÉÍÓÚáéíóú\s'.]{2}[\wÁÉÍÓÚáéíóú\s]*"
                 [(ngModel)] ="direccionForm.calle" name="calle"
                 required #spyDir #inpCalle="ngModel">
-                <div [hidden]="inpCalle.valid || inpCalle.pristine" class="alert alert-danger">
-                    La calle es un campo obligatorio. No se aceptan valores que contengan caracteres distintos de letras y números. 
-                    Evite iniciar con espacios.
+                <div *ngIf="inpCalle.invalid && !inpCalle.pristine" class="alert alert-danger">
+                    <span *ngIf="inpCalle.errors.required">
+                            La calle es un campo obligatorio.
+                    </span>
+                    <span *ngIf="inpCalle.errors.pattern">
+                        No se aceptan valores que contengan caracteres distintos de letras y números. 
+                       Evite iniciar con espacios.
+                    </span>
                 </div>
                 <i *ngIf="depuracionOn" class="font-smaller text-danger">
                     {{spyDir.className.replace('form-control','')}}</i>

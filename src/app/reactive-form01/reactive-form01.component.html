@@ -1,0 +1,37 @@
+<h5 class="mb-3 text-info">Componente <pre class="d-inline">reactive-form01</pre></h5>
+<div class="custom-control custom-switch col-12 ">
+    <input type="checkbox" class="custom-control-input" id="customSwitch1" (input)="prenderApagarExplicacion()" 
+    [checked]="explicacionOn">
+    <label class="custom-control-label" for="customSwitch1">Mostrar/Ocultar decripci&oacute;n y comentarios ejemplo</label>
+</div>
+<div *ngIf="explicacionOn" class="bg-light border border-secondary p-3 my-3 rounded">
+    <div class="text-center font-weight-bold">Ejemplo de uso b&aacute;sico de un <i>FormControl</i>.</div>
+    <div class="text-muted mt-2">
+        <strong>Caracter&iacute;sticas:</strong>
+        <ul>
+            <li>Un solo campo en el <i>template</i>, que está asociado con una instancia <code>FormControl</code> que es inicializada en el controlador.</li>
+            <li>El valor asociado al campo calle se despliega usando la propiedad <code>value</code> del <code>FormControl</code>.</li>
+            <li>Si se capturan valores que contienen grupos de espacios, éstos son reducidos y su valor es 
+                actualizado por medio del m&eacute;todo <code>setValue()</code> del <code>FormControl</code>.</li>
+        </ul>
+        <strong>Aspectos t&eacute;cnicos relevantes</strong>:
+        <ul>
+            <li>Se usa una expresi&oacute;n regular para hacer la reducción de espacios.</li>
+        </ul>
+    </div>
+
+</div>
+<div class="p-3  border border-primary rounded rounded-lg mt-3 table-primary">
+    <div class="text-secondary font-weight-bold">Dirección:</div>
+    <div class="form-row ">
+        <div class="col-sm-12 col-md-8 col-lg-9  my-2">
+            <input type="text" class="form-control" placeholder="Calle" 
+            [formControl]="formControl01" name="calle"
+            (blur)='eliminarGuposDeEspaciosCalle()'
+            required>
+        </div>
+    </div>
+</div>
+<div class="table-dark p-2 rounded my-3">
+    <span class="font-weight-bold text-white">Value: </span><span class="text-monospace text-warning">{{formControl01.value}}</span>
+</div>

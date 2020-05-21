@@ -37,102 +37,102 @@
 
 </div>
 <div class="p-3  border border-success rounded rounded-lg mt-3">
-        <form #formDir="ngForm">
-            <div class="text-primary font-weight-bold">Dirección:</div>
-            <div class="form-row ">
-                <div class="col-sm-12 col-md-8 col-lg-9  my-2">
-                    <input type="text" class="form-control" placeholder="Calle" 
-                    [(ngModel)] ="direccionForm.calle" name="calle"
-                    [class.valorValido] = "calleOk"
-                    [class.valorInvalido] = "!calleOk"
-                    (blur) = "validarCalle()"
-                    required #spyDir #inNombre="ngModel">
-                    <div [hidden]="!avisarErrorCalle" class="alert alert-danger">
-                        La calle es un campo obligatorio
-                    </div>
-                    <i *ngIf="depuracionOn" class="font-smaller text-danger">
-                        {{spyDir.className.replace('form-control','')}}</i>
+    <form #formDir="ngForm">
+        <div class="text-primary font-weight-bold">Dirección:</div>
+        <div class="form-row ">
+            <div class="col-sm-12 col-md-8 col-lg-9  my-2">
+                <input type="text" class="form-control" placeholder="Calle" 
+                [(ngModel)] ="direccionForm.calle" name="calle"
+                [class.valorValido] = "calleOk"
+                [class.valorInvalido] = "!calleOk"
+                (blur) = "validarCalle()"
+                required #spyDir #inNombre="ngModel">
+                <div [hidden]="!avisarErrorCalle" class="alert alert-danger">
+                    La calle es un campo obligatorio
                 </div>
-                <div class="col-6 col-sm my-2">
-                    <input type="text" class="form-control" placeholder="Num Ext"
-                    [(ngModel)] ="direccionForm.numeroExt" name="numeroExt"
-                    [class.valorValido] = "numeroExtOk"
-                    [class.valorInvalido] = "!numeroExtOk"
-                    (blur) = "validarNumeroExt()"
-                    required>
-                    <div [hidden]="!avisarErrorNumExt" class="alert alert-danger">
-                        El n&uacute;mero exterior es un campo obligatorio
-                    </div>
+                <i *ngIf="depuracionOn" class="font-smaller text-danger">
+                    {{spyDir.className.replace('form-control','')}}</i>
+            </div>
+            <div class="col-6 col-sm my-2">
+                <input type="text" class="form-control" placeholder="Num Ext"
+                [(ngModel)] ="direccionForm.numeroExt" name="numeroExt"
+                [class.valorValido] = "numeroExtOk"
+                [class.valorInvalido] = "!numeroExtOk"
+                (blur) = "validarNumeroExt()"
+                required>
+                <div [hidden]="!avisarErrorNumExt" class="alert alert-danger">
+                    El n&uacute;mero exterior es un campo obligatorio
                 </div>
-                <div class="col-6 col-sm my-2">
-                    <input type="text" class="form-control" placeholder="Num Int"
-                    [(ngModel)] ="direccionForm.numeroInt" name="numeroInt"
+            </div>
+            <div class="col-6 col-sm my-2">
+                <input type="text" class="form-control" placeholder="Num Int"
+                [(ngModel)] ="direccionForm.numeroInt" name="numeroInt"
+                >
+            </div>
+        </div>
+        <div class="form-row ">
+            <div class="col-sm-12 col-md-8 col-lg-9  my-2">
+                <input type="text" class="form-control " placeholder="Colonia"
+                [(ngModel)] ="direccionForm.colonia" name="colonia"
+                [class.valorValido] = "coloniaOk"
+                [class.valorInvalido] = "!coloniaOk"
+                (blur) = "validarColonia()"
+                required #spyColonia #inColonia="ngModel">
+                <div [hidden]="!avisarErrorColonia" class="alert alert-danger">
+                    La colonia es un campo obligatorio
+                </div>
+                <i *ngIf="depuracionOn" class="font-smaller text-danger">
+                {{spyColonia.className.replace('form-control','')}}</i>
+            </div>
+            <div class="col-12 col-sm my-2">
+                <input type="text" class="form-control" placeholder="C.P."
+                [(ngModel)] ="direccionForm.cp" name="cp"
+                [class.valorValido] = "cpOk"
+                [class.valorInvalido] = "!cpOk"
+                (blur) = "validarCp()"
+                required>
+                <div [hidden]="!avisarErrorCp" class="alert alert-danger">
+                    El c&oacute;digo postal es obligatorio y debe estar formado por 5 d&iacute;gitos
+                </div>
+            </div>     
+        </div>
+        <div class="form-row">
+            <div class="col-12 col-sm-6 col-md-4 my-2">
+                <select class="custom-select form-control requerido" 
+                    [(ngModel)]  = "direccionForm.cveEstado" name="iEstado" 
+                    [class.valorValido] = "cveEstadoOk"
+                    [class.valorInvalido] = "!cveEstadoOk"
+                    (blur) = "validarCveEstado()"
                     >
+                    <option selected value="-1">Estado</option>
+                    <option *ngFor="let edoI of estados; let i=index " value="{{i}}">{{edoI}}</option>
+                </select>
+                <div [hidden]="!avisarErrorCveEstado" class="alert alert-danger">
+                    Debe elegir un estado
                 </div>
             </div>
-            <div class="form-row ">
-                <div class="col-sm-12 col-md-8 col-lg-9  my-2">
-                    <input type="text" class="form-control " placeholder="Colonia"
-                    [(ngModel)] ="direccionForm.colonia" name="colonia"
-                    [class.valorValido] = "coloniaOk"
-                    [class.valorInvalido] = "!coloniaOk"
-                    (blur) = "validarColonia()"
-                    required #spyColonia #inColonia="ngModel">
-                    <div [hidden]="!avisarErrorColonia" class="alert alert-danger">
-                        La colonia es un campo obligatorio
-                    </div>
-                    <i *ngIf="depuracionOn" class="font-smaller text-danger">
-                    {{spyColonia.className.replace('form-control','')}}</i>
-                </div>
-                <div class="col-12 col-sm my-2">
-                    <input type="text" class="form-control" placeholder="C.P."
-                    [(ngModel)] ="direccionForm.cp" name="cp"
-                    [class.valorValido] = "cpOk"
-                    [class.valorInvalido] = "!cpOk"
-                    (blur) = "validarCp()"
-                    required>
-                    <div [hidden]="!avisarErrorCp" class="alert alert-danger">
-                        El c&oacute;digo postal es obligatorio y debe estar formado por 5 d&iacute;gitos
-                    </div>
-                </div>     
-            </div>
-            <div class="form-row">
-                <div class="col-12 col-sm-6 col-md-4 my-2">
-                    <select class="custom-select form-control requerido" 
-                      [(ngModel)]  = "direccionForm.cveEstado" name="iEstado" 
-                      [class.valorValido] = "cveEstadoOk"
-                      [class.valorInvalido] = "!cveEstadoOk"
-                      (blur) = "validarCveEstado()"
-                      >
-                      <option selected value="-1">Estado</option>
-                      <option *ngFor="let edoI of estados; let i=index " value="{{i}}">{{edoI}}</option>
-                    </select>
-                    <div [hidden]="!avisarErrorCveEstado" class="alert alert-danger">
-                        Debe elegir un estado
-                    </div>
-                </div>
-                <div class="col-12 col-sm-6 col-md-4 my-2">
-                    <select class="custom-select form-control requerido" 
-                      [(ngModel)]  = "direccionForm.cveMunicipio" name="iMunicipio" 
-                      [class.valorInvalido] = "!cveMunicipioOk "
-                      [class.valorValido] = "cveMunicipioOk"
-                      (blur) = "validarCveMunicipio()"
-                      >
-                        <option selected value="-1">Municipio</option>
-                        <option *ngFor="let munI of municipios[direccionForm.cveEstado ]; let i=index " 
-                                value="{{i}}">{{munI}}</option>
-                    </select>
-                    <div [hidden]="!avisarErrorCveMunicipio" class="alert alert-danger">
-                        Debe elegir un municipio
-                    </div>
+            <div class="col-12 col-sm-6 col-md-4 my-2">
+                <select class="custom-select form-control requerido" 
+                    [(ngModel)]  = "direccionForm.cveMunicipio" name="iMunicipio" 
+                    [class.valorInvalido] = "!cveMunicipioOk "
+                    [class.valorValido] = "cveMunicipioOk"
+                    (blur) = "validarCveMunicipio()"
+                    >
+                    <option selected value="-1">Municipio</option>
+                    <option *ngFor="let munI of municipios[direccionForm.cveEstado ]; let i=index " 
+                            value="{{i}}">{{munI}}</option>
+                </select>
+                <div [hidden]="!avisarErrorCveMunicipio" class="alert alert-danger">
+                    Debe elegir un municipio
                 </div>
             </div>
-            <div class="mt-5 form-row">
-                <button class="btn btn-success ml-auto mr-auto col-12 col-sm-6 col-md-4 col-xl-3" 
-                    [disabled] = "valoresFormularioSonInvalidos()"
-                    type="submit" (click)="insertarDireccion();">Registrar</button>
-            </div>
-        </form>
+        </div>
+        <div class="mt-5 form-row">
+            <button class="btn btn-success ml-auto mr-auto col-12 col-sm-6 col-md-4 col-xl-3" 
+                [disabled] = "valoresFormularioSonInvalidos()"
+                type="submit" (click)="insertarDireccion();">Registrar</button>
+        </div>
+    </form>
 </div>
 <div *ngIf="depuracionOn" class="table-dark p-1 mt-1 rounded">
     <small class="text-warning font-weight-bold table-dark text-monospace">{{diagnostico}}</small>

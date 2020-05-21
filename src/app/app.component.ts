@@ -1,26 +1,30 @@
 import { Component } from '@angular/core';
 
+class Ejemplo{
+    mostrar:boolean;
+    descripcion:string;
+    clasesCss:string;
+}
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  mostrarEjemplo01:boolean=false;
-  mostrarEjemplo02:boolean=true;
+  ejemplos:Ejemplo[] = [
+    { mostrar:false, descripcion:'Mostrar/Ocultar ejemplo de Formulario con Validación manual',     clasesCss:'table-warning' },
+    { mostrar:false, descripcion:'Mostrar/Ocultar ejemplo de Formulario con Validación incorporada',clasesCss:'table-success' },
+    { mostrar:false, descripcion:'Mostrar/Ocultar ejemplo de FormControl',                          clasesCss:'table-info' },
+    { mostrar:true,  descripcion:'Mostrar/Ocultar ejemplo de FormGroup',                            clasesCss:'table-primary' }
+  ];
+ 
   title = 'test02Forms';
 
-  activarDesactivarEjemplo01(){
-    if(this.mostrarEjemplo01)
-      this.mostrarEjemplo01 = false;
+  activarDesactivarEjemplo(n:number):void{
+    if(this.ejemplos[n].mostrar)
+      this.ejemplos[n].mostrar = false;
     else
-      this.mostrarEjemplo01 = true;
-  }
-  activarDesactivarEjemplo02(){
-    if(this.mostrarEjemplo02)
-      this.mostrarEjemplo02 = false;
-    else
-      this.mostrarEjemplo02 = true;
+      this.ejemplos[n].mostrar = true;
   }
 
 }

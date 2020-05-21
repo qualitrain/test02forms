@@ -1,34 +1,41 @@
 <div class="container">
   <h3 class="text-primary text-center mt-3">Ejemplos de Implementaci&oacute;n de Formularios</h3>
-  <div>
-    <div class="row mt-4">
-      <h4 class="text-secondary mt-4"><i>Template Driven Forms</i></h4>
-    </div>
-    <div class="row justify-content-end">
-      <div class="col-12 col-md ml-2 table-warning rounded p-2"> 
-        <div class="custom-control custom-switch ">
-            <input type="checkbox" class="custom-control-input" id="customSwitchEjm01" 
-            [checked]="mostrarEjemplo01" (input)="activarDesactivarEjemplo01()">
-            <label class="custom-control-label" for="customSwitchEjm01"><small>Mostrar/Ocultar ejemplo de Formulario con Validaci&oacute;n manual</small></label>
+  <div class="row justify-content-start ">
+      <div *ngFor="let ejemI of ejemplos; let i=index" class="col-12 col-md ml-2 rounded p-2 {{ejemI.clasesCss}}"> 
+          <div class="custom-control custom-switch ">
+              <input type="checkbox" class="custom-control-input" id="customSwitchEjm{{i}}" 
+              [checked]="ejemI.mostrar" (input)="activarDesactivarEjemplo(i)">
+              <label class="custom-control-label" for="customSwitchEjm{{i}}">
+                <small>{{ejemI.descripcion}}</small>
+              </label>
+          </div>
         </div>
-      </div>
-      <div class="col-12 col-md ml-2 table-success rounded p-2"> 
-        <div class="custom-control custom-switch ">
-            <input type="checkbox" class="custom-control-input" id="customSwitchEjm02" 
-            [checked]="mostrarEjemplo02" (input)="activarDesactivarEjemplo02()">
-            <label class="custom-control-label" for="customSwitchEjm02"><small>Mostrar/Ocultar ejemplo de Formulario con Validaci&oacute;n incorporada</small></label>
-        </div>
-      </div>
+     </div>
+  <div class="row mt-3">
+    <h4 class="text-secondary mt-3"><i>Template Driven Forms</i></h4>
+  </div>
+  <div *ngIf="ejemplos[0].mostrar" class="row mt-4">
+    <div class="col-12">
+      <app-form-templ-driven01></app-form-templ-driven01>
     </div>
-    <div *ngIf="mostrarEjemplo01" class="row mt-4">
-      <div class="col-12">
-        <app-form-templ-driven01></app-form-templ-driven01>
-      </div>
+  </div>
+  <div *ngIf="ejemplos[1].mostrar" class="row mt-4">
+    <div class="col-12">
+      <app-form-templ-driven02></app-form-templ-driven02>
     </div>
-    <div *ngIf="mostrarEjemplo02" class="row mt-4">
-      <div class="col-12">
-        <app-form-templ-driven02></app-form-templ-driven02>
-      </div>
+  </div>
+  <hr class="border-secondary mt-5">
+  <div class="row mt-2">
+    <h4 class="text-secondary mt-3"><i>Reactive Forms</i></h4>
+  </div>
+  <div *ngIf="ejemplos[2].mostrar" class="row mt-4">
+    <div class="col-12">
+      <app-reactive-form01></app-reactive-form01>
+    </div>
+  </div>
+  <div *ngIf="ejemplos[3].mostrar" class="row mt-4">
+    <div class="col-12">
+      <app-reactive-form02></app-reactive-form02>
     </div>
   </div>
 </div>
