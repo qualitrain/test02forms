@@ -1,7 +1,7 @@
 <div class="container">
   <h3 class="text-primary text-center mt-3">Ejemplos de Implementaci&oacute;n de Formularios</h3>
   <div class="row justify-content-start ">
-      <div *ngFor="let ejemI of ejemplos; let i=index" class="col-12 col-md ml-2 rounded p-2 {{ejemI.clasesCss}}"> 
+      <div *ngFor="let ejemI of ejemplos; let i=index" class="col-12 col-sm-4 col-md border-left border-top border-white rounded p-2 {{ejemI.clasesCss}}"> 
           <div class="custom-control custom-switch ">
               <input type="checkbox" class="custom-control-input" id="customSwitchEjm{{i}}" 
               [checked]="ejemI.mostrar" (input)="activarDesactivarEjemplo(i)">
@@ -36,6 +36,21 @@
   <div *ngIf="ejemplos[3].mostrar" class="row mt-4">
     <div class="col-12">
       <app-reactive-form02></app-reactive-form02>
+    </div>
+  </div>
+  <div *ngIf="ejemplos[4].mostrar" class="row mt-4">
+    <div class="col-12">
+      <app-reactive-form03></app-reactive-form03>
+    </div>
+  </div>
+  <div *ngIf="ejemplos[5].mostrar" class="row mt-4">
+    <div class="col-12">
+      <app-reactive-form04></app-reactive-form04>
+    </div>
+  </div>
+  <div *ngIf="ejemplos[6].mostrar" class="row mt-4">
+    <div class="col-12">
+      <app-reactive-form05-valid></app-reactive-form05-valid>
     </div>
   </div>
 </div>

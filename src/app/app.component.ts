@@ -12,10 +12,13 @@ class Ejemplo{
 })
 export class AppComponent {
   ejemplos:Ejemplo[] = [
-    { mostrar:false, descripcion:'Mostrar/Ocultar ejemplo de Formulario con Validación manual',     clasesCss:'table-warning' },
-    { mostrar:false, descripcion:'Mostrar/Ocultar ejemplo de Formulario con Validación incorporada',clasesCss:'table-success' },
-    { mostrar:false, descripcion:'Mostrar/Ocultar ejemplo de FormControl',                          clasesCss:'table-info' },
-    { mostrar:true,  descripcion:'Mostrar/Ocultar ejemplo de FormGroup',                            clasesCss:'table-primary' }
+    { mostrar:false, descripcion:'Formulario con Validación manual',      clasesCss:'table-warning' },
+    { mostrar:false, descripcion:'Formulario con Validación incorporada', clasesCss:'table-success' },
+    { mostrar:false, descripcion:'FormControl',                           clasesCss:'table-info' },
+    { mostrar:false,  descripcion:'FormGroup',                            clasesCss:'table-primary' },
+    { mostrar:false,  descripcion:'Formulario reactivo, sin validaciones', clasesCss:'table-secondary' },
+    { mostrar:false,  descripcion:'FormBuilder',                            clasesCss:'table-danger' },
+    { mostrar:true,  descripcion:'Validaciones formulario reactivo',       clasesCss:'bg-secondary text-white' }
   ];
  
   title = 'test02Forms';

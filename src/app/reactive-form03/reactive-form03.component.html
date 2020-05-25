@@ -1,0 +1,146 @@
+<h5 class="mb-3 text-info">Componente <pre class="d-inline">reactive-form03</pre></h5>
+
+<div class="custom-control custom-switch col-12 ">
+    <input type="checkbox" class="custom-control-input" id="customSwitch1" (input)="prenderApagarExplicacion()" 
+    [checked]="explicacionOn">
+    <label class="custom-control-label" for="customSwitch1">Mostrar/Ocultar decripci&oacute;n y comentarios </label>
+</div>
+
+<div *ngIf="explicacionOn" class="bg-light border border-secondary p-3 my-3 rounded">
+    <div class="text-center font-weight-bold">Ejemplo de formulario con un <i>FormGroup</i> que anida varios <i>FormControl</i>.</div>
+    <div class="text-muted mt-2">
+        <strong>Caracter&iacute;sticas:</strong>
+        <ul>
+            <li>Tenemos un formulario que incluye varios campos y listas de selecci&oacute;n</li>
+            <li>No hace validaciones.</li>
+            <li>Asocia cada campo de captura en el template con un objeto-modelo en el controlador.</li>
+            <li>Implementa el <i>submit</i> del formulario.</li>
+        </ul>
+        <strong>Aspectos t&eacute;cnicos relevantes</strong>:
+        <ul>
+            <li>Se arma la estructura <code>FormGroup</code>, que anida un objeto <code>FormControl</code> por cada campo del formulario,
+                de manera din&aacute;mica.
+            </li>
+            <li>La estructura del <code>FormGroup</code> es isom&oacute;rfica con el objeto modelo y comparte nombres de propiedades.
+            </li>
+            <li>
+                Cada campo <code>input</code> del formulario se asocia con uno de los <code>FormControl</code> anidados dentro
+                del <code>FormGroup</code>. 
+            </li>
+            <li>Se hace un <i>reset</i> del objeto-modelo (e indirectamente de los valores de los campos en el <i>template</i>)
+            al momento de procesar el <i>submit</i>.
+            </li>
+        </ul>
+    </div>   
+</div>
+
+<div class="p-3  border border-danger table-warning rounded rounded-lg mt-3">
+        <form [formGroup]="formulario" (ngSubmit)="insertarDireccion();" >
+            <div class="text-danger font-weight-bold">Dirección:</div>
+            <div class="form-row ">
+                <div class="col-sm-12 col-md-8 col-lg-9  my-2">
+                    <input type="text" class="form-control" placeholder="Calle" 
+                    pattern="^[\wÁÉÍÓÚáéíóú][\wÁÉÍÓÚáéíóú\s'.]{2}[\wÁÉÍÓÚáéíóú\s]*"
+                    formControlName="calle" 
+                    required>
+                    <div *ngIf="false" class="alert alert-danger">
+                        <span *ngIf="false">
+                                La calle es un campo obligatorio.
+                        </span>
+                        <span *ngIf="false">
+                            No se aceptan valores que contengan caracteres distintos de letras y números. 
+                           Evite iniciar con espacios.
+                        </span>
+                    </div>
+                </div>
+                <div class="col-6 col-sm my-2">
+                    <input type="text" class="form-control" placeholder="Num Ext"
+                    formControlName="numeroExt" 
+                    pattern="^\d\d*-[A-Za-z]$|^\d\d*$"
+                    required >
+                    <div *ngIf="false" class="alert alert-danger">
+                        El n&uacute;mero exterior es un campo obligatorio. Los valores aceptados son de la forma 34, 34-A, 5876-B
+                    </div>
+                </div>
+                <div class="col-6 col-sm my-2">
+                    <input type="text" class="form-control" placeholder="Num Int"
+                    formControlName="numeroInt"
+                    pattern="^$|^\d*$|^[w]+$"
+                    >
+                    <div *ngIf="false" class="alert alert-danger">
+                            No se aceptan valores que contengan caracteres distintos de letras y números
+                    </div>
+                </div>
+            </div>
+            <div class="form-row ">
+                <div class="col-sm-12 col-md-8 col-lg-9  my-2">
+                    <input type="text" class="form-control " placeholder="Colonia"
+                    pattern="^[\wÁÉÍÓÚáéíóú][\wÁÉÍÓÚáéíóú\s']{2}[\wÁÉÍÓÚáéíóú\s]*"
+                    formControlName="colonia"
+                    required >
+                    <div *ngIf="false" class="alert alert-danger">
+                        La colonia es un campo obligatorio. No se aceptan valores que contengan caracteres distintos de letras y números.
+                        Evite iniciar con espacios.
+                    </div>
+                </div>
+                <div class="col-12 col-sm my-2">
+                    <input type="text" class="form-control" placeholder="C.P."
+                    formControlName="cp"
+                    pattern="^\d{5}$"
+                    required >
+                    <div *ngIf="false" class="alert alert-danger">
+                        El c&oacute;digo postal es obligatorio y debe estar formado por 5 d&iacute;gitos
+                    </div>
+                </div>     
+            </div>
+            <div class="form-row">
+                <div class="col-12 col-sm-6 col-md-4 my-2">
+                    <select class="form-control" 
+                        formControlName="cveEstado">
+                        <option *ngFor="let edoI of estados; let i=index " value="{{i}}" >{{edoI}}</option>
+                    </select>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 my-2">
+                    <select class="form-control" 
+                        formControlName="cveMunicipio" >
+                        <option *ngFor="let munI of municipios[formulario.value.cveEstado ]; let i=index " 
+                                value="{{i}}" >{{munI}} </option>
+                    </select>
+                </div>
+            </div>
+            <div class="mt-5 form-row">
+                <button class="btn btn-danger ml-auto mr-auto col-12 col-sm-6 col-md-4 col-xl-3" 
+                    [disabled] = "false"
+                    type="submit" >Registrar</button>
+            </div>
+        </form>
+</div>
+    
+<div *ngIf="direcciones.length" class="mt-3">
+        <hr class="border-warning my-3">
+        <table class="table table-dark table-bordered table-striped table-sm">
+            <thead>
+                <tr>
+                    <th>Calle</th>
+                    <th>Num Ext</th>
+                    <th>Num Int</th>
+                    <th>Colonia</th>
+                    <th>C.P.</th>
+                    <th>Estado</th>
+                    <th>Municipio</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let dirI of direcciones">
+                    <td scope="row">{{dirI.calle}}</td>
+                    <td>{{dirI.numeroExt}}</td>
+                    <td>{{dirI.numeroInt}}</td>
+                    <td>{{dirI.colonia}}</td>
+                    <td>{{dirI.cp}}</td>
+                    <td>{{estados[dirI.cveEstado]}}</td>
+                    <td>{{municipios[dirI.cveEstado][dirI.cveMunicipio]}}</td>
+                </tr>
+            </tbody>
+            <caption>Direcciones capturadas</caption>
+        </table>
+</div>

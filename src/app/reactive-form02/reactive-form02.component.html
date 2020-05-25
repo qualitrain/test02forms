@@ -1,1 +1,75 @@
-<p>reactive-form02 works!</p>
+<h5 class="mb-3 text-info">Componente <pre class="d-inline">reactive-form02</pre></h5>
+
+<div class="custom-control custom-switch col-12 ">
+    <input type="checkbox" class="custom-control-input" id="customSwitch1" (input)="prenderApagarExplicacion()" 
+    [checked]="explicacionOn">
+    <label class="custom-control-label" for="customSwitch1">Mostrar/Ocultar decripci&oacute;n y comentarios ejemplo</label>
+</div>
+
+<div *ngIf="explicacionOn" class="bg-light border border-secondary p-3 my-3 rounded">
+    <div class="text-center font-weight-bold">Ejemplo de uso b&aacute;sico de un <i>FormGroup</i>.</div>
+    <div class="text-muted mt-2">
+        <strong>Caracter&iacute;sticas:</strong>
+        <ul>
+            <li>Tenemos un formulario que incluye 2 campos y un bot&oacute;n</li>
+            <li>El botón permite modificar los valores de los campos <code>input</code> con valores por defecto.</li>
+            <li>Se muestran los valores internos guardados por los <code>FormControl</code>.</li>
+        </ul>
+        <strong>Aspectos t&eacute;cnicos relevantes</strong>:
+        <ul>
+            <li>Tenemos un formulario en el <i>template</i> que est&aacute; asociado con una instancia <code>FormGroup</code> 
+                que es inicializada en el controlador.
+            </li>
+            <li>El <code>FormGroup</code> agrupa dos instancias de <code>FormControl</code>, que son inicializadas con identificadores
+                <code>calle</code> y <code>numExterior</code>.
+            </li>
+            <li>
+                Cada campo <code>input</code> del formulario se asocia con uno de los <code>FormControl</code> anidados dentro
+                del <code>FormGroup</code>. La asociaci&oacute; se hace en el <i>template </i>a partir de los identificadores <code>calle</code> y <code>numExterior</code>
+                de cada <code>FormGroup</code>.
+                La asociaci&oacute;n se especifica con el uso de la directiva <code>formControlName</code> en cada <code>input</code>.
+            </li>
+            <li>La propiedad <code>value</code> del <code>FormGroup</code> guarda un objeto que anida los valores individuales
+                de las propiedades <code>value</code> de cada uno de los <code>FormControl</code> anidados. <br>
+                As&iacute;, se requiere una interpolaci&oacute;n como la siguiente: <br>
+                <strong>
+                    <code>&#123;</code><code>&#123;</code>&nbsp;<code>formulario.value.calle &#125;</code><code>&#125;   
+                    &#123;</code><code>&#123; formulario.value.numeroExt &#125;&#125; </code>
+                </strong><br>
+                para mostrar los valores capturados por el usuario y guardados en el objeto-modelo.
+            </li>
+            <li>De modo semejante, si se desea modificar los valores de los <i>inputs</i> a partir del modelo, se debe usar el m&eacute;todo
+                <code>formulario.setValue(&#123; calle:"Av. Patriotismo", numeroExt:"878" &#125;)</code> recibiendo un objeto acorde a la estructura
+                de la instancia del <code>FormGroup</code>.
+            </li>
+        </ul>
+    </div>   
+</div>
+
+<div class="p-3  border border-danger rounded rounded-lg mt-3 table-light">
+<form [formGroup]="formulario">
+    <div class="text-secondary font-weight-bold">Dirección:</div>
+    <div class="form-row ">
+        <div class="col-sm-12 col-md-7  my-2">
+            <input type="text" class="form-control" placeholder="Calle" 
+            formControlName="calle" 
+            required>
+        </div>
+        <div class="col-sm-12 col-md-3 my-2">
+            <input type="text" class="form-control" placeholder="Num Ext"
+            formControlName="numeroExt" 
+            pattern="^\d\d*-[A-Za-z]$|^\d\d*$"
+            required >
+        </div>
+        <div class="col-sm-12 col-md-2 my-2">
+            <button class="btn btn-secondary" (click)="setDireccionDefault()">Default</button>
+        </div>
+    </div>
+
+</form>
+</div>
+<div class="table-dark p-2 rounded my-3">
+    <span class="font-weight-bold text-white">Value: </span>
+    <span class="text-monospace text-warning">{{formulario.value.calle}} {{formulario.value.numeroExt}}</span>
+</div>
+        

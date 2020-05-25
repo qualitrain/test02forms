@@ -11,7 +11,7 @@ export class ReactiveForm01Component implements OnInit {
   formControl01:FormControl;
 
   //Encender o apagar para que salga una explicación del demo en la vista
-  explicacionOn:boolean = true;
+  explicacionOn:boolean = false;
 
   // RegExp que identifica Cadenas de 2 o más espacios con alcance global
   readonly regExGpoEspacios:RegExp = /\s{2,}/g;

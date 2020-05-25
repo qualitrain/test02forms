@@ -9,6 +9,9 @@ import { FormTemplDriven01Component } from './form-templ-driven01/form-templ-dri
 import { FormTemplDriven02Component } from './form-templ-driven02/form-templ-driven02.component';
 import { ReactiveForm01Component } from './reactive-form01/reactive-form01.component';
 import { ReactiveForm02Component } from './reactive-form02/reactive-form02.component';
+import { ReactiveForm03Component } from './reactive-form03/reactive-form03.component';
+import { ReactiveForm04Component } from './reactive-form04/reactive-form04.component';
+import { ReactiveForm05ValidComponent } from './reactive-form05-valid/reactive-form05-valid.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +19,10 @@ import { ReactiveForm02Component } from './reactive-form02/reactive-form02.compo
     FormTemplDriven01Component,
     FormTemplDriven02Component,
     ReactiveForm01Component,
-    ReactiveForm02Component
+    ReactiveForm02Component,
+    ReactiveForm03Component,
+    ReactiveForm04Component,
+    ReactiveForm05ValidComponent
   ],
   imports: [
     BrowserModule,
