@@ -1,0 +1,86 @@
+<h5 class="mb-3 text-info">Componente <pre class="d-inline">form-templ-driven04</pre>. Directiva <pre class="d-inline">appValidTelsEq</pre></h5>
+
+<div class="custom-control custom-switch col-12 ">
+    <input type="checkbox" class="custom-control-input" id="customSwitch1" (input)="prenderApagarExplicacion()" 
+    [checked]="explicacionOn">
+    <label class="custom-control-label" for="customSwitch1">Mostrar/Ocultar Decripci&oacute;n y comentarios </label>
+</div>
+
+<div *ngIf="explicacionOn" class="bg-light border border-secondary p-3 my-3 rounded">
+    <div class="text-center font-weight-bold">Ejemplo de validaci&oacute;n a nivel Formulario con <i class="text-primary">cross-field validation</i> y directiva personalizada</div>
+    <div class="text-muted mt-2">
+        <strong>Caracter&iacute;sticas:</strong>
+        <ul>
+            <li>Se implementa un validador personalizado, vía una directiva, a nivel formulario.
+            </li>
+            <li>
+                Es una variación del componente <i>reactive-form-06</i>
+            </li>
+        </ul>
+        <strong>Aspectos t&eacute;cnicos relevantes</strong>:
+        <ul>
+            <li>
+                Se envolvió el validador personalizado hecho en el componente <code>reactive-form-06</code>
+                 en una directiva llamada <code>appValidTelsEq</code>
+            </li>
+            <li>
+                Se modific&oacute; el momento en que se hace la validaci&oacute;n para el primer tel&eacute;fono.
+                Se agreg&oacute; a su <code>input</code>:<br>
+                <code>&#91;ngModelOptions&#93; = "&#123;updateOn: 'blur'&#125;"</code>
+            </li>
+        </ul>
+    </div>   
+</div>
+
+<div class="p-3 border border-danger rounded rounded-lg mt-3">
+    <form (ngSubmit)="insertarTelefonos(formulario);" #formulario="ngForm" appValidTelsEq>
+        <div class="text-secondary font-weight-bold my-2">Tel&eacute;fonos:</div>
+        <div class="form-row ">
+            <div class="col-12 col-sm-4 col-md-3  mx-auto">
+                <input type="text" class="form-control text-center" placeholder="tel&eacute;fono 1" [ngModelOptions]="{updateOn: 'blur'}"
+                    pattern="^[\d]{10}$" name="tel1"  [(ngModel)] ="telefonos.tel1" required #ngtel1="ngModel" #spyTel>
+                <div *ngIf="ngtel1.invalid && ( !ngtel1.pristine )" 
+                    class="alert alert-danger text-center">
+                    <span *ngIf="ngtel1.errors.required">
+                        Campo obligatorio.
+                    </span>
+                    <span *ngIf="ngtel1.errors.pattern">
+                        Formato inv&aacute;lido. Deben ser 10 d&iacute;gitos consecutivos.
+                    </span>
+                </div>
+                <div *ngIf="debugOn" class="font-smaller text-danger">
+                        <i>{{spyTel.className.replace('form-control','')}}</i>  {{ telefonos.tel1 }}
+                </div>
+            </div>
+        </div>
+        <div class="form-row mt-2">
+            <div class="col-12 col-sm-4 col-md-3  mx-auto">
+                <input type="text" class="form-control text-center" placeholder="tel&eacute;fono 2"
+                pattern="^[\d]{10}$" name="tel2"  [(ngModel)] ="telefonos.tel2" #ngtel2="ngModel">
+                <div *ngIf="ngtel2.invalid && ( !ngtel2.pristine )" 
+                    class="alert alert-danger">
+                    <span *ngIf="ngtel2.errors.pattern">
+                        Formato inv&aacute;lido. Deben ser 10 d&iacute;gitos consecutivos.
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="form-row mt-2">
+            <div *ngIf="formulario.errors?.telefonosIguales && (formulario.dirty || formulario.touched)" 
+                 class="col-12 col-sm-10, col-md-6 mx-auto alert alert-danger text-center">
+                Los tel&eacute;fonos deben ser distintos entre ellos
+            </div>
+
+        </div>
+        <div class="mt-5 form-row">
+            <button class="btn btn-danger ml-auto mr-auto col-12 col-sm-6 col-md-4 col-xl-3" 
+                [disabled] = "formulario.invalid"
+                type="submit" >Registrar</button>
+        </div>
+    </form>
+</div>
+<p class="font-weight-bold" *ngIf="debugOn">
+     Form Status: <span class="text-monospace" 
+         [class.text-danger]="formulario.invalid">{{ formulario.status }}</span>
+</p>    
+

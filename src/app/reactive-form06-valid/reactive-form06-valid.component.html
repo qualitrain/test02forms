@@ -1,0 +1,85 @@
+<h5 class="mb-3 text-info">Componente <pre class="d-inline">reactive-form06-valid</pre></h5>
+
+<div class="custom-control custom-switch col-12 ">
+    <input type="checkbox" class="custom-control-input" id="customSwitch1" (input)="prenderApagarExplicacion()" 
+    [checked]="explicacionOn">
+    <label class="custom-control-label" for="customSwitch1">Mostrar/Ocultar Decripci&oacute;n y comentarios </label>
+</div>
+
+<div *ngIf="explicacionOn" class="bg-light border border-secondary p-3 my-3 rounded">
+    <div class="text-center font-weight-bold">Ejemplo de validaci&oacute;n a nivel FormGroup con <i class="text-primary">cross-field validation</i></div>
+    <div class="text-muted mt-2">
+        <strong>Caracter&iacute;sticas:</strong>
+        <ul>
+            <li>Se implementa un validador personalizado a nivel formulario.
+            </li>
+            <li>
+                El validador personalizado permite validar la relación entre dos controles (campos) distintos.
+            </li>
+        </ul>
+        <strong>Aspectos t&eacute;cnicos relevantes</strong>:
+        <ul>
+            <li>
+                Se agregó el validador personalizado usando los m&eacute;todos de <code>FormGroup</code>,
+                 llamados <code>setValidators(funcionValidadora)</code> y <code>updateValueAndValidity()</code>.
+            </li>
+            <li>
+                La funci&oacute;n validadora implementa la interface <code>ValidatorFn</code>.
+            </li>
+            <li>
+                El formulario pregunta por el error as&iacute;: <code>formulario.errors?.telefonosIguales</code>.
+            </li>
+        </ul>
+    </div>   
+</div>
+
+<div class="p-3 border border-danger rounded rounded-lg mt-3">
+    <form [formGroup]="formulario" (ngSubmit)="insertarTelefonos();" >
+        <div class="text-secondary font-weight-bold my-2">Tel&eacute;fonos:</div>
+        <div class="form-row ">
+            <div class="col-12 col-sm-4 col-md-3  mx-auto">
+                <input type="text" class="form-control text-center" placeholder="tel&eacute;fono 1"
+                    formControlName="tel1" required >
+                <div *ngIf="tel1.invalid && ( !tel1.pristine )" 
+                    class="alert alert-danger">
+                    <span *ngIf="tel1.errors.required">
+                        Campo obligatorio.
+                    </span>
+                    <span *ngIf="tel1.errors.pattern">
+                        Formato inv&aacute;lido. Deben ser 10 d&iacute;gitos consecutivos.
+                    </span>
+                </div>
+                <div *ngIf="debugOn">{{ estadosTel1 }}</div>
+            </div>
+        </div>
+        <div class="form-row mt-2">
+            <div class="col-12 col-sm-4 col-md-3  mx-auto">
+                <input type="text" class="form-control text-center" placeholder="tel&eacute;fono 2"
+                    formControlName="tel2" >
+                <div *ngIf="tel2.invalid && ( !tel2.pristine )" 
+                    class="alert alert-danger">
+                    <span *ngIf="tel2.errors.pattern">
+                        Formato inv&aacute;lido. Deben ser 10 d&iacute;gitos consecutivos.
+                    </span>
+                </div>
+                <div *ngIf="debugOn">{{ estadosTel2 }}</div>
+            </div>
+        </div>
+        <div class="form-row mt-2">
+            <div *ngIf="formulario.errors?.telefonosIguales && (formulario.dirty || formulario.touched)" 
+                 class="col-12 col-sm-10, col-md-6 mx-auto alert alert-danger">
+                Los tel&eacute;fonos deben ser distintos entre ellos
+            </div>
+
+        </div>
+        <div class="mt-5 form-row">
+            <button class="btn btn-danger ml-auto mr-auto col-12 col-sm-6 col-md-4 col-xl-3" 
+                [disabled] = "formulario.invalid"
+                type="submit" >Registrar</button>
+        </div>
+    </form>
+</div>
+<p class="font-weight-bold" *ngIf="debugOn">
+     Form Status: <span class="text-monospace" 
+         [class.text-danger]="formulario.invalid">{{ formulario.status }}</span>
+</p>    

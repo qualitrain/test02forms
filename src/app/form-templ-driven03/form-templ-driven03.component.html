@@ -1,9 +1,10 @@
-<h5 class="mb-3 text-info">Componente <pre class="d-inline">form-templ-driven02</pre></h5>
+<h5 class="mb-3 text-info">Componente <pre class="d-inline">form-templ-driven03</pre>. 
+    Directiva <pre class="d-inline">appValidContLogic</pre>.</h5>
 <div class="row">
     <div class="custom-control custom-switch col-12 col-sm-6">
             <input type="checkbox" class="custom-control-input" id="customSwitch1" (input)="prenderApagarExplicacion()" 
             [checked]="explicacionOn">
-            <label class="custom-control-label" for="customSwitch1">Mostrar/Ocultar decripci&oacute;n y comentarios ejemplo</label>
+            <label class="custom-control-label" for="customSwitch1">Mostrar/Ocultar descripci&oacute;n y comentarios</label>
     </div>
     <div class="custom-control custom-switch col-12 col-sm-6">
             <input type="checkbox" class="custom-control-input" id="customSwitch2" (input)="prenderApagarDepuracion()" 
@@ -12,56 +13,34 @@
     </div>
 </div>
 <div *ngIf="explicacionOn" class="table-info p-3 my-3 rounded">
-        <div class="text-center font-weight-bold">Ejemplo de formulario de tipo <i>Template Driven Forms</i> con validaciones propias de Angular</div>
+        <div class="text-center font-weight-bold">Formulario tipo <i>Template Driven Forms</i> con validador personalizado</div>
         <div class="text-muted mt-2">
             Caracter&iacute;sticas:
             <ul>
-                <li>Los campos en estado v&aacute;lido tienen una franja vertical de color <span class="text-success">verde</span> a la izquierda.</li>
-                <li>Los campos en estado inv&aacute;lido tienen una franja vertical de color <span class="text-danger">rojo</span> a la izquierda.</li>
-                <li>El bot&oacute;n de registro se habilita solamente cuando todos los campos son v&aacute;lidos.</li>
-                <li>El ejemplo propone una estructura simple para formularios de captura basado en <i>ngModel</i></li>
+                <li>Se agreg&oacute; una <i>attribute directive</i> de <strong>validaci&oacute;n personalizada</strong> llamada 
+                <code class="font-weight-bold">appValidContLogic</code></li>
+                <li>El validador personalizado eval&uacute;a los porcentajes de vocales
+                    y consonantes, as&iacute; como la repetición de vocales para determinar
+                    si un contenido puede o no, tener sentido.
+                </li>
+                <li>El validador devuelve un booleano <i>palabrasSinSentido</i> en caso de error.</li>
+                <li>El validador personalizado se usa en los campos <i>Calle</i> y <i>Colonia</i>. Puede 
+                probarlo tecleando repeticiones de la misma letra.</li>
+                <li>El formulario muestra un mensaje <i>El contenido carece de sentido</i> cuando
+                el validador personalizado reporta error</li>
             </ul>
             <strong>Aspectos t&eacute;cnicos relevantes</strong>:
             <ul>
-                <li>Cada campo validable en el <i>template</i> usa el <strong>atributo html 5 </strong> <code class="font-weight-bold">pattern</code>, que ser&aacute; 
-                    la v&iacute;a para que un campo pueda ser reconocido por Angular como v&aacute;lido o inv&aacute;lido.</li>
-                <li>Se aprovechan las <strong>clases CSS</strong> que Angular crea en los campos de entrada. Estas clases reflejan el estado de cada campo.
-                    Las clases son <code class="font-weight-bold">ng-untouched</code>, <code class="font-weight-bold">ng-touched</code>, 
-                    <code class="font-weight-bold">ng-pristine</code>, <code class="font-weight-bold">ng-dirty</code>,
-                    <code class="font-weight-bold">ng-invalid</code> y <code class="font-weight-bold">ng-valid</code>.
+                <li>El validador envuelve una funci&oacute;n de validaci&oacute;n utilizada tambi&eacute;n en
+                    el componente <code class="font-weight-bold">reactive-form05-valid</code>.
                 </li>
                 <li>
-                    Se usan <strong>estilos sobre</strong> algunas de las <strong>clases mencionadas</strong>, para marcar visualmente (con bordes izquierdos de color verde o rojo ) los campos como v&aacute;lidos 
-                    o inv&aacute;lidos. <br>
-                    <code>
-                            <strong>.ng-valid</strong>[required]   &#123;<br>
-                                border-left: 5px solid #42A948; <br>
-                              &#125;<br>
-                              
-                             <strong> .ng-invalid</strong>:not(form)   &#123; <br>
-                                border-left: 5px solid #a94442;<br> 
-                            &#125;<br>
-                    </code>
+                    La directiva implementa la <i>interface </i> <code>Validator</code> y el m&eacute;todo
+                    <code>validate(control: AbstractControl): ValidationErrors</code>
                 </li>
-                <li>Se accede al objeto subyacente <code class="font-weight-bold">ngForm</code>.
-                </li>
-                <li>Se invoca al <strong>m&eacute;todo <i>resetForm()</i> de <i>ngForm</i></strong> tras el <i>submit</i> del formulario
-                    y se vuelve a inicializar el objeto que sirve de <i>modelo</i>,
-                    pero de manera as&iacute;ncrona para no chocar con el ciclo de vida subyacente de Angular. De otro modo,
-                    la ejecución del <i>reset</i> destruye el objeto <i>modelo</i>.
-                </li>
-                <li>
-                    Para desplegar los mensajes de error asociados a las validaciones <strong>se accede al objeto <i>ngModel</i> asociado
-                    con cada control de captura</strong> de datos y con base en su estado (<code>untouched, touched, pristine, dirty, valid</code> e <code>invalid</code>)
-                    se hace visible o invisible cada mensaje.
-                </li>
-                <li>
-                    <strong>Podemos generar mensajes de error m&aacute;s espec&iacute;ficos</strong> si revisamos el campo <code>errors.<i>tipoError</i></code> que está asociado
-                    al atributo html usado para la validaci&oacute;n (<code>required, minlength, pattern,</code> etc.)<br>
-                    As&iacute;, podr&iacute;amos usar algo como: <strong><code>&lt;div &#42;ngIf='ngMiCalle.errors.required'&gt;</code></strong>
-                </li>
-                <li>
-                    Se usa el <strong>estado de validez/invalidez a nivel forma</strong> para habilitar/deshabilitar el boton de <i>submit</i>
+                <li>La directiva se declara como <i>provider</i> del <i>InjectionToken </i> 
+                    <code>NG_VALIDATORS</code> para poder ser incorporado a la infraestructura
+                    de validaci&oacute;n de formularios <i>Template Driven</i>.
                 </li>
             </ul>
         </div>
@@ -76,7 +55,7 @@
                 <input type="text" class="form-control" placeholder="Calle" 
                 pattern="^[\wÁÉÍÓÚáéíóú][\wÁÉÍÓÚáéíóú\s'.]{2}[\wÁÉÍÓÚáéíóú\s]*"
                 [(ngModel)] ="direccionForm.calle" name="calle"
-                required #spyDir #inpCalle="ngModel">
+                required appValidContLogic #spyDir #inpCalle="ngModel">
                 <div *ngIf="inpCalle.invalid && !inpCalle.pristine" class="alert alert-danger">
                     <span *ngIf="inpCalle.errors.required">
                             La calle es un campo obligatorio.
@@ -85,9 +64,12 @@
                         No se aceptan valores que contengan caracteres distintos de letras y números. 
                        Evite iniciar con espacios.
                     </span>
+                    <span *ngIf="inpCalle.errors.palabrasSinSentido" class="font-weight-bold">
+                        El contenido carece de sentido.
+                    </span>
                 </div>
                 <i *ngIf="depuracionOn" class="font-smaller text-danger">
-                    {{spyDir.className}}</i>
+                    {{spyDir.className.replace('form-control','')}}</i>
             </div>
             <div class="col-6 col-sm my-2">
                 <input type="text" class="form-control" placeholder="Num Ext"
@@ -113,10 +95,18 @@
                 <input type="text" class="form-control " placeholder="Colonia"
                 pattern="^[\wÁÉÍÓÚáéíóú][\wÁÉÍÓÚáéíóú\s']{2}[\wÁÉÍÓÚáéíóú\s]*"
                 [(ngModel)] ="direccionForm.colonia" name="colonia"
-                required #spyColonia #inpColonia="ngModel">
-                <div [hidden]="inpColonia.valid || inpColonia.pristine" class="alert alert-danger">
-                    La colonia es un campo obligatorio. No se aceptan valores que contengan caracteres distintos de letras y números.
-                    Evite iniciar con espacios.
+                required #spyColonia appValidContLogic #inpColonia="ngModel">
+                <div *ngIf="inpColonia.invalid && !inpColonia.pristine" class="alert alert-danger">
+                    <span *ngIf="inpColonia.errors.required" class="font-weight-bold">
+                        La colonia es un campo obligatorio. 
+                    </span>
+                    <span *ngIf="inpColonia.errors.pattern" class="font-weight-bold">
+                        No se aceptan valores que contengan caracteres distintos de letras y números.
+                        Evite iniciar con espacios.
+                    </span>
+                    <span *ngIf="inpColonia.errors.palabrasSinSentido" class="font-weight-bold">
+                        El contenido carece de sentido.
+                    </span>
                 </div>
                 <i *ngIf="depuracionOn" class="font-smaller text-danger">
                 {{spyColonia.className.replace('form-control','')}}</i>

@@ -18,7 +18,11 @@ export class AppComponent {
     { mostrar:false,  descripcion:'FormGroup',                            clasesCss:'table-primary' },
     { mostrar:false,  descripcion:'Formulario reactivo, sin validaciones', clasesCss:'table-secondary' },
     { mostrar:false,  descripcion:'FormBuilder',                            clasesCss:'table-danger' },
-    { mostrar:true,  descripcion:'Validaciones formulario reactivo',       clasesCss:'bg-secondary text-white' }
+    { mostrar:false,  descripcion:'Validaciones formulario reactivo',       clasesCss:'bg-secondary text-white' },
+    { mostrar:false,  descripcion:'Validador personalizado en driven template', clasesCss:'bg-info text-white' },
+    { mostrar:false,  descripcion:'Validación cross-field en reactive form', clasesCss:'bg-success text-white' },
+    { mostrar:false,  descripcion:'Validación cross-field en template driven', clasesCss:'bg-warning ' },
+    { mostrar:true,  descripcion:'Validación asíncrona en reactive form', clasesCss:'bg-danger text-white' }
   ];
  
   title = 'test02Forms';

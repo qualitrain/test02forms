@@ -115,7 +115,7 @@ export class ReactiveForm05ValidComponent implements OnInit {
     let nConsonantes = arrCoincidencias === null ? 0 : arrCoincidencias.length;
 
     let porcenVocales = nVocales / (nVocales + nConsonantes); 
-    console.log("nVocales:" + nVocales, ", nConsonantes:" + nConsonantes + ", % vocales:" + porcenVocales);
+//    console.log("nVocales:" + nVocales, ", nConsonantes:" + nConsonantes + ", % vocales:" + porcenVocales);
     if(porcenVocales < porcenMinVocales){ //Muy pocas vocales
       return {palabrasSinSentido:true};
     }
