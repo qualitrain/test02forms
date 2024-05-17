@@ -26,12 +26,14 @@
     <div class="form-row ">
         <div class="col-sm-12 col-md-8 col-lg-9  my-2">
             <input type="text" class="form-control" placeholder="Calle" 
-            [formControl]="formControl01" name="calle"
-            (blur)='eliminarGuposDeEspaciosCalle()'
-            required>
+                [formControl]="formControl01" 
+                name="calle"
+                (blur)='eliminarGuposDeEspaciosCalle()'
+                required>
         </div>
     </div>
 </div>
 <div class="table-dark p-2 rounded my-3">
-    <span class="font-weight-bold text-white">Value: </span><span class="text-monospace text-warning">{{formControl01.value}}</span>
+    <span class="font-weight-bold text-white">Value: </span>
+    <span class="text-monospace text-warning">{{formControl01.value}}</span>
 </div>

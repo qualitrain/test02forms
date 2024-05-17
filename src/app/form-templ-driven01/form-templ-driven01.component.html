@@ -38,15 +38,15 @@
 </div>
 <div class="p-3  border border-success rounded rounded-lg mt-3">
     <form #formDir="ngForm">
-        <div class="text-primary font-weight-bold">Dirección:</div>
+        <div class="text-primary font-weight-bold">Direcci&oacute;n:</div>
         <div class="form-row ">
             <div class="col-sm-12 col-md-8 col-lg-9  my-2">
                 <input type="text" class="form-control" placeholder="Calle" 
-                [(ngModel)] ="direccionForm.calle" name="calle"
-                [class.valorValido] = "calleOk"
-                [class.valorInvalido] = "!calleOk"
-                (blur) = "validarCalle()"
-                required #spyDir #inNombre="ngModel">
+                    [(ngModel)] ="direccionForm.calle" name="calle"
+                    [class.valorValido] = "calleOk"
+                    [class.valorInvalido] = "!calleOk"
+                    (blur) = "validarCalle()"
+                    required #spyDir #inNombre="ngModel">
                 <div [hidden]="!avisarErrorCalle" class="alert alert-danger">
                     La calle es un campo obligatorio
                 </div>
@@ -55,29 +55,29 @@
             </div>
             <div class="col-6 col-sm my-2">
                 <input type="text" class="form-control" placeholder="Num Ext"
-                [(ngModel)] ="direccionForm.numeroExt" name="numeroExt"
-                [class.valorValido] = "numeroExtOk"
-                [class.valorInvalido] = "!numeroExtOk"
-                (blur) = "validarNumeroExt()"
-                required>
+                    [(ngModel)] ="direccionForm.numeroExt" name="numeroExt"
+                    [class.valorValido] = "numeroExtOk"
+                    [class.valorInvalido] = "!numeroExtOk"
+                    (blur) = "validarNumeroExt()"
+                    required>
                 <div [hidden]="!avisarErrorNumExt" class="alert alert-danger">
                     El n&uacute;mero exterior es un campo obligatorio
                 </div>
             </div>
             <div class="col-6 col-sm my-2">
                 <input type="text" class="form-control" placeholder="Num Int"
-                [(ngModel)] ="direccionForm.numeroInt" name="numeroInt"
+                    [(ngModel)] ="direccionForm.numeroInt" name="numeroInt"
                 >
             </div>
         </div>
         <div class="form-row ">
             <div class="col-sm-12 col-md-8 col-lg-9  my-2">
                 <input type="text" class="form-control " placeholder="Colonia"
-                [(ngModel)] ="direccionForm.colonia" name="colonia"
-                [class.valorValido] = "coloniaOk"
-                [class.valorInvalido] = "!coloniaOk"
-                (blur) = "validarColonia()"
-                required #spyColonia #inColonia="ngModel">
+                    [(ngModel)] ="direccionForm.colonia" name="colonia"
+                    [class.valorValido] = "coloniaOk"
+                    [class.valorInvalido] = "!coloniaOk"
+                    (blur) = "validarColonia()"
+                    required #spyColonia #inColonia="ngModel">
                 <div [hidden]="!avisarErrorColonia" class="alert alert-danger">
                     La colonia es un campo obligatorio
                 </div>
@@ -86,11 +86,11 @@
             </div>
             <div class="col-12 col-sm my-2">
                 <input type="text" class="form-control" placeholder="C.P."
-                [(ngModel)] ="direccionForm.cp" name="cp"
-                [class.valorValido] = "cpOk"
-                [class.valorInvalido] = "!cpOk"
-                (blur) = "validarCp()"
-                required>
+                    [(ngModel)] ="direccionForm.cp" name="cp"
+                    [class.valorValido] = "cpOk"
+                    [class.valorInvalido] = "!cpOk"
+                    (blur) = "validarCp()"
+                    required>
                 <div [hidden]="!avisarErrorCp" class="alert alert-danger">
                     El c&oacute;digo postal es obligatorio y debe estar formado por 5 d&iacute;gitos
                 </div>

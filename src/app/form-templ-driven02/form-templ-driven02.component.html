@@ -74,9 +74,9 @@
         <div class="form-row ">
             <div class="col-sm-12 col-md-8 col-lg-9  my-2">
                 <input type="text" class="form-control" placeholder="Calle" 
-                pattern="^[\wÁÉÍÓÚáéíóú][\wÁÉÍÓÚáéíóú\s'.]{2}[\wÁÉÍÓÚáéíóú\s]*"
-                [(ngModel)] ="direccionForm.calle" name="calle"
-                required #spyDir #inpCalle="ngModel">
+                    pattern="^[\wÁÉÍÓÚáéíóú][\wÁÉÍÓÚáéíóú\s'.]{2}[\wÁÉÍÓÚáéíóú\s]*"
+                    [(ngModel)] ="direccionForm.calle" name="calle"
+                    required #spyDir #inpCalle="ngModel">
                 <div *ngIf="inpCalle.invalid && !inpCalle.pristine" class="alert alert-danger">
                     <span *ngIf="inpCalle.errors.required">
                             La calle es un campo obligatorio.
@@ -87,33 +87,33 @@
                     </span>
                 </div>
                 <i *ngIf="depuracionOn" class="font-smaller text-danger">
-                    {{spyDir.className}}</i>
+                    {{spyDir.className.replace('form-control','')}}</i>
             </div>
             <div class="col-6 col-sm my-2">
                 <input type="text" class="form-control" placeholder="Num Ext"
-                [(ngModel)] ="direccionForm.numeroExt" name="numeroExt" 
-                pattern="^\d\d*\-[A-Za-z]$|^\d\d*$"
-                required #inpNumeroExt="ngModel">
+                    [(ngModel)] ="direccionForm.numeroExt" name="numeroExt" 
+                    pattern="^\d\d*\-[A-Za-z]$|^\d\d*$"
+                    required #inpNumeroExt="ngModel">
                 <div [hidden]="inpNumeroExt.valid || inpNumeroExt.pristine" class="alert alert-danger">
                     El n&uacute;mero exterior es un campo obligatorio. Los valores aceptados son de la forma 34, 34-A, 5876-B
                 </div>
             </div>
             <div class="col-6 col-sm my-2">
                 <input type="text" class="form-control" placeholder="Num Int"
-                [(ngModel)] ="direccionForm.numeroInt" name="numeroInt"
-                pattern="^$|^\d*$|^[w]+$"
-                #inpNumeroInt="ngModel">
+                    [(ngModel)] ="direccionForm.numeroInt" name="numeroInt"
+                    pattern="^$|^\d+$|^[\d]+[A-Z]*$"
+                    #inpNumeroInt="ngModel">
                 <div [hidden]="inpNumeroInt.valid || inpNumeroInt.pristine" class="alert alert-danger">
-                        No se aceptan valores que contengan caracteres distintos de letras y números
+                        No se aceptan valores que contengan caracteres distintos de letras may&uacute;sculas y números
                     </div>
                 </div>
         </div>
         <div class="form-row ">
             <div class="col-sm-12 col-md-8 col-lg-9  my-2">
                 <input type="text" class="form-control " placeholder="Colonia"
-                pattern="^[\wÁÉÍÓÚáéíóú][\wÁÉÍÓÚáéíóú\s']{2}[\wÁÉÍÓÚáéíóú\s]*"
-                [(ngModel)] ="direccionForm.colonia" name="colonia"
-                required #spyColonia #inpColonia="ngModel">
+                    pattern="^[\wÁÉÍÓÚáéíóú][\wÁÉÍÓÚáéíóú\s']{2}[\wÁÉÍÓÚáéíóú\s]*"
+                    [(ngModel)] ="direccionForm.colonia" name="colonia"
+                    required #spyColonia #inpColonia="ngModel">
                 <div [hidden]="inpColonia.valid || inpColonia.pristine" class="alert alert-danger">
                     La colonia es un campo obligatorio. No se aceptan valores que contengan caracteres distintos de letras y números.
                     Evite iniciar con espacios.
@@ -123,9 +123,9 @@
             </div>
             <div class="col-12 col-sm my-2">
                 <input type="text" class="form-control" placeholder="C.P."
-                [(ngModel)] ="direccionForm.cp" name="cp"
-                pattern="^\d{5}$"
-                required #inpCp="ngModel">
+                    [(ngModel)] ="direccionForm.cp" name="cp"
+                    pattern="^\d{5}$"
+                    required #inpCp="ngModel">
                 <div [hidden]="inpCp.valid || inpCp.pristine" class="alert alert-danger">
                     El c&oacute;digo postal es obligatorio y debe estar formado por 5 d&iacute;gitos
                 </div>

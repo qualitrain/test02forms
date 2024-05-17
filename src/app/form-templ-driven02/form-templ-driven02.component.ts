@@ -1,4 +1,4 @@
-import { Component, OnInit, DoCheck } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Direccion } from '../entidades/direccion';
 import { NgForm} from '@angular/forms'
 
@@ -10,7 +10,7 @@ import { NgForm} from '@angular/forms'
 export class FormTemplDriven02Component implements OnInit {
 
   //Encender o apagar para monitorear comportamiento del formulario
-  depuracionOn:boolean=false;
+  depuracionOn:boolean=true;
   //Encender o apagar para que salga una explicación del demo en la vista
   explicacionOn:boolean = false;
 

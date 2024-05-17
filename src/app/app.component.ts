@@ -22,7 +22,7 @@ export class AppComponent {
     { mostrar:false,  descripcion:'Validador personalizado en driven template', clasesCss:'bg-info text-white' },
     { mostrar:false,  descripcion:'Validación cross-field en reactive form', clasesCss:'bg-success text-white' },
     { mostrar:false,  descripcion:'Validación cross-field en template driven', clasesCss:'bg-warning ' },
-    { mostrar:true,  descripcion:'Validación asíncrona en reactive form', clasesCss:'bg-danger text-white' }
+    { mostrar:false,  descripcion:'Validación asíncrona en reactive form', clasesCss:'bg-danger text-white' }
   ];
  
   title = 'test02Forms';

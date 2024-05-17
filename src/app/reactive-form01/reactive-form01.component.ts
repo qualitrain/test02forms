@@ -21,6 +21,15 @@ export class ReactiveForm01Component implements OnInit {
   
   ngOnInit(): void {
     this.formControl01 = new FormControl('');
+    
+    this.formControl01.valueChanges.subscribe(valor => {
+      console.log('Valor cambió:', valor);
+    });
+    
+    this.formControl01.statusChanges.subscribe(status => {
+      console.log('Estado cambió:', status);
+    });
+    
   }
   eliminarGuposDeEspaciosCalle(){
     let valor:string = this.formControl01.value;
